@@ -1,0 +1,52 @@
+apply plugin: 'java'
+apply plugin: 'war' 
+apply plugin: 'eclipse'
+
+defaultTasks 'eclipse', 'clean', 'deployToTomcat'
+
+repositories {
+	mavenCentral()
+	jcenter()
+}
+
+war {
+   archiveName = 'gradlewebapp.war'
+   webInf { from 'src/main/resources/application.xml' }
+}
+
+task deployToTomcat (type: Copy, dependsOn: 'war') {
+   from 'build/libs/gradlewebapp.war'
+   into '/Applications/apache-tomcat-8.0.30/webapps'
+}
+
+dependencies {
+	compile 'junit:junit:3.8.1'
+	compile 'org.springframework:spring-webmvc:4.1.6.RELEASE'
+	compile 'org.springframework.security:spring-security-web:4.0.2.RELEASE'
+	compile 'org.springframework.security:spring-security-config:4.0.2.RELEASE'
+	compile 'org.springframework.security:spring-security-ldap:4.0.2.RELEASE'
+	compile 'org.springframework.security:spring-security-taglibs:4.0.2.RELEASE'
+	compile 'org.springframework.security:spring-security-acl:4.0.2.RELEASE'
+	compile 'org.springframework.security:spring-security-cas:4.0.2.RELEASE'
+	compile 'org.springframework.security:spring-security-openid:4.0.2.RELEASE'
+	compile 'javax.validation:validation-api:1.0.0.GA'	
+	compile 'org.hibernate:hibernate-validator:4.3.1.Final'
+	compile 'javax.servlet:servlet-api:2.5'
+	compile 'com.lowagie:itext:2.1.7'
+	compile 'org.apache.poi:poi:3.9'
+	runtime 'org.springframework.webflow:spring-webflow:2.4.1.RELEASE'
+	runtime 'jstl:jstl:1.2'
+	compile 'com.oracle:ojdbc6:11.2.0.3'
+	compile 'commons-dbcp:commons-dbcp:1.2.2'
+	compile 'log4j:log4j:1.2.17'
+} 
+
+
+
+    
+
+	
+  
+ 
+
+
